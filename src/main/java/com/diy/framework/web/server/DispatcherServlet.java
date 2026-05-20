@@ -1,6 +1,5 @@
 package com.diy.framework.web.server;
 
-import com.diy.app.controller.lecture.LectureController;
 import com.diy.framework.web.bean.BeanContainer;
 import com.diy.framework.web.controller.AbstractController;
 import com.diy.framework.web.view.ModelAndView;
@@ -16,7 +15,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
-import java.util.Map;
 
 @WebServlet("/")
 public class DispatcherServlet extends HttpServlet {
@@ -27,10 +25,7 @@ public class DispatcherServlet extends HttpServlet {
     @Override
     public void init() throws ServletException {
         viewResolvers = List.of(new JspViewResolver(), new HtmlViewResolver(), new RedirectViewResolver());
-        this.handlerMapping = new HandlerMapping(
-                Map.of(
-                        "/lectures", container.getBean(LectureController.class))
-        );
+        this.handlerMapping = new HandlerMapping(container);
     }
 
     @Override

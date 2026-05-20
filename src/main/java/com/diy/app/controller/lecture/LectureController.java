@@ -21,14 +21,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Controller
+@Controller("/lectures")
 public class LectureController implements AbstractController {
 
-    private ObjectMapper objectMapper = new ObjectMapper();
+    private final ObjectMapper objectMapper;
     private final LectureRepository lectureRepository;
 
-    public LectureController(@Autowired(beanValue = "InMemoryLectureRepositoryImpl") LectureRepository lectureRepository) {
+    public LectureController(@Autowired(beanValue = "InMemoryLectureRepositoryImpl") LectureRepository lectureRepository,
+                             ObjectMapper objectMapper) {
         this.lectureRepository = lectureRepository;
+        this.objectMapper = objectMapper;
     }
 
     @Override
